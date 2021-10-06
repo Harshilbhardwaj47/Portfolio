@@ -1,7 +1,32 @@
-import React from 'react'
-import { View, Text, KeyboardAvoidingView, TextInput, StyleSheet } from 'react-native'
+import React, {useState} from 'react'
+import { View, Text, KeyboardAvoidingView, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import { auth } from '../firebase'
 
 const LoginScreen = () => {
+
+    const [email, setEmail]=useState('')
+    const [password, setPassword]=useState('')
+
+    const handleSignUp =()=>{
+        auth    
+        .createUserWithEmailAndPassword(email,password)
+        .then(userCredentials=>{
+            const user = userCredentials.user;
+            console.log('Registered with user',user.email);
+        })
+        .cath(error=>alert(error.message))
+    }
+
+    const handleLogIn =()=>{
+        auth
+        .signInWithEmailAndPassword(email,password)
+        .then(userCredentials=>{
+            const user = userCredentials.user;
+            console.log('Logged in with user', user.email);
+        })
+        .cath(error=>alert(error.message))
+    }
+
     return (
         <KeyboardAvoidingView
         style={styles.container}
@@ -10,17 +35,32 @@ const LoginScreen = () => {
             <View style={styles.inputcontainer}>
                 <TextInput
                 placeholder="Email"
-                //value={}
-                //onChangeText={text => }
+                value={email}
+                onChangeText={text => setEmail(text) }
                 style={styles.input}
                 />
                 <TextInput
                 placeholder="Passwprd"
-                //value={}
-                //onChangeText={text => }
+                value={password}
+                onChangeText={text =>setPassword(text) }
                 style={styles.input}
                 secureTextEntry
                 />
+            </View>
+
+            <View style={styles.buttoncontainer}>
+                <TouchableOpacity
+                onPress = {handleLogIn}
+                style={styles.button}
+                >
+                <Text style={styles.buttonText}>Login</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                onPress = {handleSignUp}
+                style={[styles.button , styles.buttonOutline]}
+                >
+                <Text style={styles.buttonOutlineText}>Register</Text>
+                </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
     )
@@ -33,5 +73,47 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-    }
+    },
+
+    inputcontainer:{
+        width: '80%'
+    },
+    input: {
+      backgroundColor: 'white',
+      paddingHorizontal: 15,
+      paddingVertical: 10,
+      borderRadius: 10,
+      marginTop: 5,
+    },
+    buttoncontainer: {
+        width: '60%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 40,
+    },
+    button: {
+        backgroundColor: '#0782F9',
+        width:'100%',
+        padding: 15,
+        borderRadius: 10,
+        alignItems: 'center',
+    },
+    buttonText: {
+        color: 'white',
+        fontWeight: '700',
+        fontSize: 16,
+    },
+    buttonOutline: {
+        backgroundColor: 'white',
+        marginTop: 5,
+        borderColor: '#0782F9',
+        borderWidth: 2,
+    },
+    buttonOutlineText: {
+        color: '#0782F9',
+        fontWeight: '700',
+        fontSize: 16,
+    },
+
+
 })

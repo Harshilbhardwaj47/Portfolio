@@ -21,9 +21,9 @@ if(firebase.apps.length === 0)
 
 else 
 {
-    app = firbase.app()
+    app = firebase.app()
 }
 
-const auth = firbase.auth()
+const auth = firebase.auth()
 
 export {auth};
