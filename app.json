@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "Portfolio application using react native \n\nversion 0.0.1\n\nVersion features: Login with specific user email and password no duplicate user can log in once logged in user is targeted to the home screen same goes with login. \nHome-screen contains a logged-in user email id and a button for log out.\n\nFuture updates: Home-Screen UI will be modified as a portfolio page with a scroll view.",
+    "githubUrl": "https://github.com/Harshilbhardwaj47/Portfolio"
   }
 }
