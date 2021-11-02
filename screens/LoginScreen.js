@@ -39,6 +39,10 @@ const LoginScreen = () => {
         .cath(error=>alert(error.message))
     }
 
+    const handleforgot =()=>{
+        console.log(hello)
+    }
+
     return (
         <KeyboardAvoidingView
         style={styles.container}
@@ -73,6 +77,13 @@ const LoginScreen = () => {
                 >
                 <Text style={styles.buttonOutlineText}>Register</Text>
                 </TouchableOpacity>
+            </View>
+
+            <View>
+                <TouchableOpacity
+                onPress = {handleforgot}
+                style={styles.forgotbutton}
+                ><Text>Forgot Password ?</Text></TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
     )
@@ -125,6 +136,9 @@ const styles = StyleSheet.create({
         color: '#0782F9',
         fontWeight: '700',
         fontSize: 16,
+    },
+    forgotbutton: {
+        marginTop: 5,
     },
 
 
